@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/media.css" />
+    <link rel="stylesheet" href="media-main.css" />
+
+    <title>Frontend Mentor | E-commerce product page</title>
+  </head>
+  <body>
+    <!-- Mobile navbar -->
+    <div class="nav">
+      <input type="checkbox" class="toggler" />
+      <div class="hamburger"><div></div></div>
+      <div class="nav-cart_menu">
+        <div class="cart-menu_head">
+          <h2>Cart</h2>
+          <hr />
+        </div>
+
+        <div class="cart-menu_mobile">
+          <div class="top-Line">
+            <div class="mobile-img">
+              <img src="/images/image-product-1-thumbnail.jpg" alt="" />
+            </div>
+            <div class="m-text">
+              <p class="x">Fall Limited Edition Sneakers</p>
+              <br />
+              <p class="m-cost">
+                $125 x <span class="m-ammount">1</span>
+                <span class="m-total">125$</span>
+              </p>
+            </div>
+
+            <div class="m-delete">
+              <img src="/images/icon-delete.svg" alt="" />
+            </div>
+          </div>
+
+          <button id="checkout-m">Checkout</button>
+        </div>
+        <div class="m-empty">Your Cart is empty</div>
+      </div>
+
+      <div class="menu">
+        <div>
+          <ul>
+            <li><a href="">Collections</a></li>
+            <li><a href="">Men</a></li>
+            <li><a href="">Women</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div></div>
+      <div class="cart">
+        <img class="m-logo" src="/images/logo.svg" alt="" />
+
+        <img class="shopping-cart" src="/images/icon-cart.svg" alt="" />
+
+        <img class="user" src="/images/image-avatar.png" alt="" />
+      </div>
+    </div>
+
+    <div class="navbar">
+      <div class="navbar-menu">
+        <div class="navbar-menu-logo">
+          <img src="/images/logo.svg" alt="" />
+        </div>
+        <div class="navbar-menu-list">
+          <ul>
+            <li><a href="#">Collections</a></li>
+            <li><a href="">Men</a></li>
+            <li><a href="">Women</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Main Navbar -->
+      <div class="navbar-account">
+        <div class="navbar-account_cart">
+          <img class="cart-img" src="/images/icon-cart.svg" alt="" />
+          <span class="notification">1</span>
+          <div class="cart-menu">
+            <div class="head">
+              <h2>Cart</h2>
+              <hr />
+            </div>
+            <div class="cart-menu-content">
+              <div class="line-1">
+                <div class="icon">
+                  <img src="/images/image-product-1-thumbnail.jpg" alt="" />
+                </div>
+                <div class="s-text">
+                  <p class="t">Fall Limited Edition Sneakers</p>
+                  <br />
+                  <p class="cost">
+                    $125 x <span class="amount"> 1</span>
+                    <span class="total"> $125</span>
+                  </p>
+                </div>
+                <div class="delete-icon">
+                  <img src="/images/icon-delete.svg" alt="" />
+                </div>
+              </div>
+              <button id="checkout-b">Checkout</button>
+            </div>
+            <div class="text"><p>Your cart is empty</p></div>
+          </div>
+        </div>
+        <div class="navbar-account_user">
+          <img src="/images/image-avatar.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <!-- Black horizontal line below nav  -->
+    <hr />
+
+    <div id="overlay" onclick="off()"></div>
+
+    <!-- Main content section  -->
+    <section class="main">
+      <!-- Carousel section -->
+
+      <section class="main-modal no-display">
+        <!-- close button -->
+        <div class="main-modal-close">
+          <img src="images/icon-close.svg" alt="" />
+        </div>
+        <div class="main-modal-previous" onclick="changeSlide(-1)">
+          <img src="images/icon-previous.svg" alt="" />
+        </div>
+        <!-- Next button  -->
+        <div class="main-modal-next" onclick="changeSlide(1)">
+          <img src="images/icon-next.svg" alt="" />
+        </div>
+        <!-- Main carousel -->
+        <div class="main-modal-carousel">
+          <ul class="main-modal-carousel_slides">
+            <li class="slide active" id="c1">
+              <img src="images/image-product-1.jpg" alt="" />
+            </li>
+            <li class="slide" id="c2">
+              <img src="images/image-product-2.jpg" alt="" />
+            </li>
+            <li class="slide" id="c3">
+              <img src="images/image-product-3.jpg" alt="" />
+            </li>
+            <li class="slide" id="c4">
+              <img src="images/image-product-4.jpg" alt="" />
+            </li>
+          </ul>
+        </div>
+
+        <!-- Modal pannel- displays the images below the main image -->
+        <div class="main-modal_pannel">
+          <div class="main-modal_pannel-1 mini"></div>
+          <div class="main-modal_pannel-2 mini"></div>
+          <div class="main-modal_pannel-3 mini"></div>
+          <div class="main-modal_pannel-4 mini"></div>
+        </div>
+      </section>
+
+      <!-- This section displays the images on the left side of the screeen and allows the user to navigate the images using the mini thumbnail images  -->
+
+      <section class="main-images">
+        <div class="main-images-larger">
+          <div class="main-modal-previous-1" onclick="mobileChangeSlide(-1)">
+            <img src="images/icon-previous.svg" alt="" />
+          </div>
+          <!-- Next button  -->
+          <div class="main-modal-next-1" onclick="mobileChangeSlide(1)">
+            <img src="images/icon-next.svg" alt="" />
+          </div>
+          <div class="main-images-1 slides-2" onclick="on()">
+            <img
+              id="1"
+              class="active-i slides-2"
+              src="images/image-product-1.jpg"
+              alt=""
+            />
+            <img
+              id="2"
+              class="slides-2"
+              src="images/image-product-2.jpg"
+              alt=""
+            />
+            <img
+              id="3"
+              class="slides-2"
+              src="images/image-product-3.jpg"
+              alt=""
+            />
+            <img
+              id="4"
+              class="slides-2"
+              src="images/image-product-4.jpg"
+              alt=""
+            />
+          </div>
+          <div class="thumbnail-pannel">
+            <div class="thumb thumbnail-1"></div>
+            <div class="thumb thumbnail-2"></div>
+            <div class="thumb thumbnail-3"></div>
+            <div class="thumb thumbnail-4"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product information section -->
+      <div class="main-info">
+        <div class="main-info-head">
+          <h4>SNEAKER COMPANY</h4>
+
+          <h1>Fall Limited Edition Sneakeks</h1>
+
+          <p>
+            These low-profile sneakers are your perfect casual wear companion.
+            Featuring a durable rubber outer sole, they’ll withstand everything
+            the weather can offer.
+          </p>
+        </div>
+        <!-- Pricing information -->
+        <div class="main-info-pricing">
+          <p>$125.00 <span>50%</span></p>
+          <p>$250.00</p>
+        </div>
+
+        <div class="main-info-atc">
+          <div class="counter">
+            <img class="minus" src="images/icon-minus.svg" alt="" />
+            <!-- <div class="numberofitems">0</div> -->
+            <input type="text" value="0" min="0" class="numberofitems" />
+            <img class="plus" src="images/icon-plus.svg" alt="" />
+          </div>
+          <!-- ATC button  -->
+          <div id="atc-button" class="button">
+            <button>
+              <img src="/images/icon-cart.svg" alt="" /> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

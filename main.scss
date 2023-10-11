@@ -1,0 +1,571 @@
+@import "config";
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@100&family=Readex+Pro:wght@160;400&family=Spline+Sans&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1rem;
+  font-family: "Epilogue", sans-serif;
+  font-family: "Readex Pro", sans-serif;
+  font-family: "Spline Sans", sans-serif;
+}
+
+li,
+a,
+ul {
+  text-decoration: none;
+  list-style: none;
+}
+// Hiding mobile nav
+.nav {
+  display: none;
+}
+
+hr {
+  width: 75%;
+  margin: -1rem auto;
+  border: 0.5px solid $grayish-blue;
+}
+
+// Background dim for pop up carousel
+.background-blur {
+  background-color: rgb(94, 94, 94);
+
+  height: 100%;
+  -webkit-filter: blur(8px);
+  z-index: 0;
+}
+
+// Navbar
+
+.navbar {
+  width: 75%;
+  margin: 4rem auto;
+  display: flex;
+  justify-content: space-between;
+  //Menu containing logo and list
+
+  hr {
+    display: no;
+  }
+  &-menu {
+    display: inherit;
+    gap: 4rem;
+
+    &-list {
+      ul {
+        display: flex;
+        gap: 2rem;
+      }
+
+      a {
+        color: $grayish-blue;
+        padding-bottom: 64px;
+      }
+
+      a:hover {
+        font-weight: 900;
+        color: black;
+        border-bottom: 2px solid $orange;
+        border-bottom-width: 6px;
+        height: 100px;
+      }
+    }
+  }
+  //   account section containg shopping cart and user avartar
+  &-account {
+    display: flex;
+    gap: 2rem;
+    &_user img {
+      // &_cart img {
+      height: 50px;
+      width: auto;
+      margin-top: -13px;
+    }
+    // the cart section
+    &_cart {
+      cursor: pointer;
+      position: relative;
+      place-items: center;
+      // Notification that pops up above shopping caart icon when item is ATC
+      .notification {
+        background: $orange;
+        width: 20px;
+        position: absolute;
+        bottom: 2.2rem;
+        padding: 0 0.2rem 0 0.4rem;
+        border-radius: 40%;
+        font-size: 12px;
+        left: 0.6rem;
+        color: $white;
+        transition: all 0.4s;
+        display: none;
+      }
+      // The actual cart that apperas when the shopping icon is hovered on
+      .cart-menu {
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: absolute;
+        top: 64px;
+        right: -110px;
+        width: 380px;
+        height: 268px;
+        padding: 20px;
+        background: $white;
+        border-radius: 8px;
+        border: 1px solid $lgrayish-blue;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        appearance: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        &-content {
+          visibility: hidden;
+        }
+        &-content .line-1 {
+          display: flex;
+          gap: 20px;
+          margin-bottom: 1rem;
+        }
+        &-content .line-1 .icon img {
+          height: min-content;
+          width: 70px;
+          border-radius: 10px;
+        }
+        &-content .s-text .t,
+        .cost {
+          font-size: 16px;
+          color: $grayish-blue;
+        }
+
+        &-content .total {
+          color: $black;
+          font-weight: 1000;
+          margin-left: 5px;
+          font-size: 18px;
+        }
+
+        &-content .delete-icon {
+          margin-top: 1rem;
+        }
+
+        &-content #checkout-b {
+          padding: 1rem 3.2rem;
+          cursor: pointer;
+          border: none;
+          border-radius: 8px;
+          background-color: $orange;
+          color: $white;
+          font-size: 16px;
+          width: 100%;
+        }
+
+        .head {
+          display: inherit;
+          flex-direction: inherit;
+          gap: 2rem;
+          visibility: visible;
+
+          hr {
+            margin-top: -0.6rem;
+            width: 340px;
+          }
+          h2 {
+            padding: 10px 0px 0 10px;
+          }
+        }
+
+        .text {
+          position: relative;
+          // display: none;
+          visibility: visible;
+          bottom: 7rem;
+          color: $grayish-blue;
+          margin-inline: auto;
+        }
+      }
+    }
+
+    &_cart img::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      scale: 0.25;
+      opacity: 0;
+      transition: 0s;
+      background: $white;
+    }
+
+    &_cart:hover > img::before {
+      scale: 1;
+      opacity: 1;
+    }
+
+    &_cart:hover > .cart-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+// Dark overlay section
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+// Main section content
+
+.main {
+  margin: 6rem auto;
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+
+  //   Image carousel that pops out when clicked on
+  .no-display {
+    display: none;
+  }
+
+  // Main modal- this opens when the large image is clicked on
+  &-modal {
+    // width: 350px;
+    // height: 222px;
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-inline-end: -50%;
+    // right: 25rem;
+    //    Previous and next buttons
+    &-previous,
+    &-next {
+      height: 3.5rem;
+      width: 3.5rem;
+      border-radius: 50%;
+      background-color: $orange;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        cursor: pointer;
+        background-color: lightcoral;
+      }
+    }
+
+    &-next {
+      position: absolute;
+      top: 17.5rem;
+      left: 35.8rem;
+    }
+
+    &-previous {
+      position: absolute;
+      top: 17.5rem;
+      right: 35.8rem;
+      z-index: 51;
+    }
+    // Close button
+
+    &-close {
+      margin-block-end: 0.8rem;
+      margin-inline-start: 36rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    //    Image carousel
+    &-carousel {
+      width: 600px;
+      // Change hieght back to 380px
+      height: 380px;
+      border-radius: 15px;
+
+      &_slides .slide {
+        opacity: 0;
+        inset: 0;
+        transition: 200ms opacity ease-in;
+        transition-delay: 200s;
+        border-radius: 15px;
+        display: none;
+      }
+
+      .slide > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        object-position: center;
+        border-radius: 15px;
+      }
+
+      .active {
+        transition: 200ms opacity ease-in-out;
+        transition-delay: 200ms;
+        display: block;
+        opacity: 1;
+      }
+    }
+
+    // Modal-Pannel section-:mini images
+    &_pannel {
+      width: auto;
+      height: min-content;
+      margin-block-start: 14rem;
+      margin-inline: auto;
+      display: flex;
+      justify-content: space-evenly;
+      gap: 2rem;
+      &-1 {
+        background-image: url(./images/image-product-1-thumbnail.jpg);
+        &:hover {
+          opacity: 0.7;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      }
+      &-2 {
+        background-image: url(./images/image-product-2-thumbnail.jpg);
+        &:hover {
+          opacity: 0.7;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      }
+      &-3 {
+        background-image: url(./images/image-product-3-thumbnail.jpg);
+        &:hover {
+          opacity: 0.7;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      }
+      &-4 {
+        background-image: url(./images/image-product-4-thumbnail.jpg);
+        &:hover {
+          opacity: 0.7;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+
+    //  mini image block shown below main image
+    .mini {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 10px;
+      background-position: center;
+      background-size: cover;
+      border: 1px solid $white;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  // Images section on the left side of the screen
+  &-images {
+    width: 65%;
+    // position: relative;
+    // z-index: -1;
+    // main large image container
+    &-larger {
+      width: inherit;
+      height: inherit;
+      border-radius: 1rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        object-position: center;
+        border-radius: inherit;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      img {
+        display: none;
+      }
+      .active-i {
+        display: block;
+      }
+
+      //    mini image container
+      .thumbnail-pannel {
+        width: 100%;
+        margin-block-start: 2rem;
+        display: flex;
+        justify-content: space-between;
+        .thumb {
+          width: 5.5rem;
+          height: 5.5rem;
+          border-radius: 0.8rem;
+          background-position: center;
+          background-size: cover;
+          border: 1px solid $white;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        // For small images below main product image
+        .thumbnail-1 {
+          background-image: url(./images/image-product-1-thumbnail.jpg);
+          &:hover {
+            opacity: 0.8;
+            border: $orange 2px solid;
+          }
+        }
+        .thumbnail-2 {
+          background-image: url(./images/image-product-2-thumbnail.jpg);
+          &:hover {
+            opacity: 0.8;
+            border: $orange 2px solid;
+          }
+        }
+        .thumbnail-3 {
+          background-image: url(./images/image-product-3-thumbnail.jpg);
+          &:hover {
+            opacity: 0.8;
+            border: $orange 2px solid;
+          }
+        }
+        .thumbnail-4 {
+          background-image: url(./images/image-product-4-thumbnail.jpg);
+          &:hover {
+            opacity: 0.8;
+            border: $orange 2px solid;
+          }
+        }
+      }
+    }
+
+    // Mobile Carousel
+    // TODO for mobile
+    &-carousel {
+      display: none;
+    }
+  }
+
+  //  Product information section
+  &-info {
+    padding-top: 4rem;
+    width: 45%;
+    // Text: sneaker company, product name and description
+    &-head {
+      h4 {
+        color: $orange;
+        margin-block-end: 1rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-block-end: 2rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: $darkg-blue;
+        padding-block-end: 1rem;
+      }
+    }
+    // Pricing information
+    &-pricing {
+      margin-bottom: 2rem;
+      p:nth-child(1) {
+        font-size: 2rem;
+        font-weight: 900;
+
+        span {
+          font-size: 1.2rem;
+          color: $orange;
+          background-color: #fed8b9;
+          padding: 2px;
+          border-radius: 4px;
+          margin-left: 10px;
+        }
+      }
+
+      p:nth-child(2) {
+        color: $darkg-blue;
+        margin: 0.5rem auto;
+        text-decoration: line-through;
+      }
+    }
+    // ATc button and qauntity counter
+    &-atc {
+      display: flex;
+      justify-content: space-between;
+      // Quantity counter
+
+      .counter {
+        background: #f2f2f2;
+        padding: 10px;
+        border-radius: 8px;
+        height: 3.5rem;
+        width: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .numberofitems {
+          font-weight: 700;
+          font-size: 1rem;
+          text-align: center;
+          width: 20px;
+          border: none;
+          background: inherit;
+        }
+
+        .plus:hover,
+        .minus:hover {
+          cursor: pointer;
+        }
+      }
+
+      .button button {
+        padding: 1rem 3.2rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        background-color: $orange;
+        color: $white;
+        font-size: 16px;
+        width: max (240px, 90%);
+        img {
+          margin-right: 5px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
